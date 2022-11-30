@@ -2,29 +2,20 @@ body {
     margin: 0;
     font-family: sans-serif;
 }
-#root {
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.container {
     min-height: 100vh;
-    background-color: coral;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-}
-.mark {
-    color: aquamarine;
-}
-.card {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    border: 1px solid;
-}
-.box {
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 10px;
+    grid-template-rows: 100px auto 50px;
+}
+.container>* {
+    padding: 0 calc(50% - 600px);
+}
+@media (max-width: 1260px) {
+    .container>* {
+        padding: 0 30px;
+    }
 }
