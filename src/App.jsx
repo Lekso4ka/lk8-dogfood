@@ -4,6 +4,8 @@ import products from "./assets/data.json";
 
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
+import Search from "./components/Search/search";
+
 import Home from "./pages/Home.jsx";
 import Catalog from "./pages/Catalog.jsx";
 
@@ -15,6 +17,7 @@ const App = () => {
         <div className="container">
             <Header user={user} setUser={setUser}/>
             <main>
+                <Search data={products}/>
                 {user ? <Catalog data={products}/> : <Home data={smiles}/>}
             </main>
             <Footer/>
