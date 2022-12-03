@@ -34,3 +34,10 @@
 .search-block svg:hover {
     fill: rgb(243, 231, 5);
 }
+
+.search-result {
+    position: absolute;
+    top: 36px;
+    left: 12px;
+    font-size: 12px;
+}

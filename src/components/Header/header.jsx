@@ -1,7 +1,8 @@
 import React, {useState} from "react";
+import Search from "../Search/search";
 import "./header.css";
 
-export default ({user, setUser}) => {
+export default ({user, setUser, products}) => {
     // хук состояния [свойство, функция в качестве аргумента которой передается новое значение нашего свойства] = useState(аргумент - изначальное значение свойства)
     // const [user, setUser] = useState(localStorage.getItem("user8"));
 
@@ -21,7 +22,8 @@ export default ({user, setUser}) => {
     }
     return <header>
         <a className="logo" href="">DogFood</a>
-        <input type="search" placeholder="Поиск..." className="search"/>
+        <Search data={products}/>
+        {/* <input type="search" placeholder="Поиск..." className="search"/> */}
         <nav className="menu">
             {/* true && true */}
             {user && <a href="">{user}</a>}
