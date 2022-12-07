@@ -38,3 +38,31 @@
 .modal-close:hover {
     background-color: rgb(243, 231, 5);
 }
+form {
+    display: grid;
+    gap: 10px;
+}
+input {
+    flex: 1;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 1px solid silver;
+    font-size: 16px;
+    outline: none;
+}
+input:focus {
+    border-color: rgb(243, 231, 5);
+}
+button.btn {
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+    background-color: rgb(243, 231, 5);
+}
+button.link {
+    background-color: transparent;
+    border: 1px solid rgb(243, 231, 5);
+    box-sizing: border-box;
+}
