@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default ({change}) => {
+export default ({change, api, close}) => {
     const [inp1, setInp1] = useState("");
     const [inp2, setInp2] = useState("");
 
@@ -10,7 +10,15 @@ export default ({change}) => {
             email: inp1,
             password: inp2
         }
-        console.log(body);
+        api.signIn(body)
+            .then(res => res.json())
+            .then(data => {
+                // Не забыть отловить сообщение с ошибкой
+                console.log(data);
+                setInp1("");
+                setInp2("");
+                close(false)
+            })
     }
 
     return <form onSubmit={sendForm}>
