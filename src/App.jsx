@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./style.css";
 import products from "./assets/data.json";
 
@@ -15,8 +15,49 @@ const smiles = [<span>^_^</span>, "=)", "O_o", ";(", "^_0", "@_@", "–_–"];
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user8"));
+    const [token, setToken] = useState(localStorage.getItem("token8"));
     const [modalActive, setModalActive] = useState(false);
-    const [api, setApi] = useState(new Api(""));
+    const [api, setApi] = useState(new Api(token));
+    const [goods, setGoods] = useState([]);
+
+    useEffect(() => {
+        console.log("Hello!")
+        console.log(token);
+        if (token) {
+            // загрузить данные с сервера
+            api.getProducts()
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setGoods(data.products);
+                })
+        }
+    }, []) // функция отработает один раз при создании компонента
+
+    useEffect(() => {
+        console.log("Change token");
+        setApi(new Api(token));
+        setUser(localStorage.getItem("user8"));
+    }, [token])
+
+    useEffect(() => {
+        if (!user) {
+            localStorage.removeItem("token8");
+            setToken(null);
+        }
+    }, [user])
+
+    useEffect(() => {
+        if (token) {
+            // загрузить данные с сервера
+            api.getProducts()
+                .then(res => res.json())
+                .then(data => {
+                    setGoods(data.products);
+                })
+        }
+    }, [api])
+
     return (
         <>
             <div className="container">
@@ -27,7 +68,7 @@ const App = () => {
                     setModalActive={setModalActive}
                 />
                 <main>
-                    {user ? <Catalog data={products}/> : <Home data={smiles}/>}
+                    {user ? <Catalog data={goods}/> : <Home data={smiles}/>}
                 </main>
                 <Footer/>
             </div>
@@ -35,7 +76,7 @@ const App = () => {
                 isActive, setState - параметры, которые работают внутри компонента Modal
                 modalActive, setModalActive - значения, которые сохраняются внутри параметров
             */}
-            <Modal isActive={modalActive} setState={setModalActive} api={api}/>
+            <Modal isActive={modalActive} setState={setModalActive} api={api} setToken={setToken}/>
         </>
     )
 }
