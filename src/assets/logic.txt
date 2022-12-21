@@ -12,3 +12,9 @@
 
     User создается в App, изменяется в Header и Login(Modal)
     Token создается в App, изменяется в Header и Login(Modal)
+
+
+SPA Single page application
+Установка роутеров для React
+npm install react-router react-router-dom
+Сайт https://reactrouter.com/en/main/start/tutorial

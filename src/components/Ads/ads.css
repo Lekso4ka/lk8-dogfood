@@ -1,0 +1,28 @@
+.promo {
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    background-image: url("./img/pic.jpg");
+    /* background-image: url("../../assets/img/pic.jpg"); */
+    background-position: center;
+    background-size: cover;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.promo:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #dededeaa;
+    z-index: -1;
+}
+.promo img {
+    width: 200px;
+}
