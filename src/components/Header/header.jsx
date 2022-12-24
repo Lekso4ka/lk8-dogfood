@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import "./header.css";
 
-export default ({user, setUser, products, setModalActive}) => {
+export default ({user, setUser, goods, searchGoods, setModalActive}) => {
     // хук состояния [свойство, функция в качестве аргумента которой передается новое значение нашего свойства] = useState(аргумент - изначальное значение свойства)
     // const [user, setUser] = useState(localStorage.getItem("user8"));
 
@@ -28,7 +28,7 @@ export default ({user, setUser, products, setModalActive}) => {
     }
     return <header>
         <Link className="logo" to="/">DogFood</Link>
-        <Search data={products}/>
+        <Search data={goods} searchGoods={searchGoods}/>
         {/* <input type="search" placeholder="Поиск..." className="search"/> */}
         <nav className="menu">
             {/* true && true */}

@@ -3,7 +3,7 @@ import "./search.css";
 import {ReactComponent as SearchImg} from "./img/magnifying-glass-solid.svg";
 import {ReactComponent as CloseImg} from "./img/circle-xmark-regular.svg";
 
-export default ({data}) => {
+export default ({data, searchGoods}) => {
     const [text, updateText] = useState("");
     const [searchData, setSearchData] = useState(data);
     const clearSearch = () => {
@@ -14,6 +14,7 @@ export default ({data}) => {
         updateText(e.target.value);
         let arr = data.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setSearchData(arr);
+        searchGoods(arr);
     }
     return <div className="search-block">
         <input placeholder="Поиск..." value={text} onChange={search}/>
