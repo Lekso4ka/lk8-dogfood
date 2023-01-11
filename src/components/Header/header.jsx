@@ -9,15 +9,6 @@ export default ({goods, searchGoods, setModalActive}) => {
 
     const logIn = (e) => {
         e.preventDefault();
-        // let name = prompt("Как вас зовут?");
-        // if (name) {
-        //     localStorage.setItem("user8", name);
-        //     setUser(name);
-        // }
-        // setModalActive(function(previous) {
-        //     console.log("Активность модального окна:", previous)
-        //     return !previous;
-        // });
         setModalActive(prev => !prev);
     }
     const logOut = (e) => {
@@ -31,7 +22,7 @@ export default ({goods, searchGoods, setModalActive}) => {
         {/* <input type="search" placeholder="Поиск..." className="search"/> */}
         <nav className="menu">
             {/* true && true */}
-            {user && <Link to="/profile">{user}</Link>}
+            {user && user.name && <Link to="/profile">{user.name}</Link>}
             {!user && <a href="" onClick={logIn}>Войти</a>}
             {user && <a href="" onClick={logOut}>Выйти</a>}
         </nav>

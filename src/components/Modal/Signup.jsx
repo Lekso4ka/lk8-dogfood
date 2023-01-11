@@ -29,15 +29,14 @@ export default ({change, close}) => {
         api.signUp(body)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.err) {
                     api.signIn(body)
                         .then(res => res.json())
                         .then(data => {
-                            localStorage.setItem("user8", data.data.name);
+                            localStorage.setItem("user8", JSON.stringify(data.data));
                             localStorage.setItem("token8", data.token);
                             setToken(data.token);
-                            setUser(data.data.name);
+                            setUser(data.data);
                         })
                     setInp1("");
                     setInp2("");

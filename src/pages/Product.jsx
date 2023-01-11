@@ -1,40 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {useParams, Link} from "react-router-dom";
 import Review from "../components/Review/review";
+import Ctx from "../Ctx";
 
 export default ({}) => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
-    const [users, setUsers] = useState([]);
     // По id товара получаются данные о товаре для отрисовки страницы с товаром
-    let token = localStorage.getItem("token8");
+    const {api} = useContext(Ctx);
     useEffect(() => {
-        if (token) {
-            fetch(`https://api.react-learning.ru/products/${id}`, {
-                headers: {
-                    authorization: `Bearer ${token}`
-                }
-            })
+        api.getProduct(id)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
             })
-        }
     })
-    // useEffect(() => {
-    //     if (token) {
-    //         fetch(`https://api.react-learning.ru/v2/group-8/users`, {
-    //             headers: {
-    //                 authorization: `Bearer ${token}`
-    //             }
-    //         })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setUsers(data);
-    //             console.log(data);
-    //         })
-    //     }
-    // })
     return <>
         <h1>{product.name || "Страница товара"}</h1>
         <p>{id}</p>

@@ -18,7 +18,7 @@ export default ({change, close}) => {
             .then(data => {
                 // Не забыть отловить сообщение с ошибкой
                 console.log(data);
-                localStorage.setItem("user8", data.data.name);
+                localStorage.setItem("user8", JSON.stringify(data.data));
                 localStorage.setItem("token8", data.token);
                 setToken(data.token);
                 setInp1("");

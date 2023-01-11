@@ -22,7 +22,11 @@ const PATH = "/";
 const smiles = [<span>^_^</span>, "=)", "O_o", ";(", "^_0", "@_@", "–_–"];
 
 const App = () => {
-    const [user, setUser] = useState(localStorage.getItem("user8"));
+    let usr = localStorage.getItem("user8");
+    if (usr) {
+        usr = JSON.parse(usr);
+    }
+    const [user, setUser] = useState(usr);
     const [token, setToken] = useState(localStorage.getItem("token8"));
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState(new Api(token));
@@ -46,7 +50,11 @@ const App = () => {
     useEffect(() => {
         console.log("Change token");
         setApi(new Api(token));
-        setUser(localStorage.getItem("user8"));
+        let usr = localStorage.getItem("user8");
+        if (usr) {
+            usr = JSON.parse(usr);
+        }
+        setUser(usr);
     }, [token])
 
     useEffect(() => {
