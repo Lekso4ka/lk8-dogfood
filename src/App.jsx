@@ -16,6 +16,9 @@ import Product from "./pages/Product";
 import {Api} from "./Api";
 import Ctx from "./Ctx";
 
+const PATH = "/";
+// const PATH = "/lk8-dogfood/";
+
 const smiles = [<span>^_^</span>, "=)", "O_o", ";(", "^_0", "@_@", "–_–"];
 
 const App = () => {
@@ -85,10 +88,10 @@ const App = () => {
                 <main>
                     {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                     <Routes>
-                        <Route path="/" element={<Home data={smiles}/>}/>
-                        <Route path="/catalog" element={<Catalog data={visibleGoods}/>}/>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/catalog/:id" element={<Product/>}/>
+                        <Route path={PATH} element={<Home data={smiles}/>}/>
+                        <Route path={PATH + "catalog"} element={<Catalog data={visibleGoods}/>}/>
+                        <Route path={PATH + "profile"} element={<Profile/>}/>
+                        <Route path={PATH + "catalog/:id"} element={<Product/>}/>
                     </Routes>
                 </main>
                 <Footer/>
