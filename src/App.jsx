@@ -34,21 +34,17 @@ const App = () => {
     const [visibleGoods, setVisibleGoods] = useState(goods);
 
     useEffect(() => {
-        console.log("Hello!")
-        console.log(token);
         if (token) {
             // загрузить данные с сервера
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setGoods(data.products);
                 })
         }
     }, []) // функция отработает один раз при создании компонента
 
     useEffect(() => {
-        console.log("Change token");
         setApi(new Api(token));
         let usr = localStorage.getItem("user8");
         if (usr) {
@@ -83,21 +79,23 @@ const App = () => {
             user: user,
             token: token,
             api: api,
+            modalActive: modalActive,
+            goods: goods,
+            visibleGoods: visibleGoods,
             setUser: setUser,
             setToken: setToken,
-            setApi: setApi
+            setApi: setApi,
+            setModalActive: setModalActive,
+            setGoods: setGoods,
+            setVisibleGoods,
+            PATH: PATH
         }}>
             <div className="container">
-                <Header 
-                    goods={goods}
-                    searchGoods={setVisibleGoods}
-                    setModalActive={setModalActive}
-                />
+                <Header/>
                 <main>
-                    {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                     <Routes>
                         <Route path={PATH} element={<Home data={smiles}/>}/>
-                        <Route path={PATH + "catalog"} element={<Catalog data={visibleGoods}/>}/>
+                        <Route path={PATH + "catalog"} element={<Catalog data={smiles}/>}/>
                         <Route path={PATH + "profile"} element={<Profile/>}/>
                         <Route path={PATH + "catalog/:id"} element={<Product/>}/>
                     </Routes>
@@ -108,7 +106,7 @@ const App = () => {
                 isActive, setState - параметры, которые работают внутри компонента Modal
                 modalActive, setModalActive - значения, которые сохраняются внутри параметров
             */}
-            <Modal isActive={modalActive} setState={setModalActive}/>
+            <Modal/>
         </Ctx.Provider>
     )
 }
