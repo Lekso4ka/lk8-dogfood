@@ -15,7 +15,7 @@ export default ({data}) => {
                     <div className="cards">
                         {/* Опасно! Работают профи, не пытайтесь повторить это сами!  */}
                         {visibleGoods.map((el, i) => <Link to={`/catalog/${el._id}`} key={el._id}>
-                            <Card key={"card_" + i} text={el.name} like={(i + 1) % 2 === 0}/>
+                            <Card key={"card_" + i} {...el}/>
                         </Link>)}
                     </div>
                 </>
