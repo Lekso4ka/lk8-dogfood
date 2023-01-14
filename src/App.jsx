@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 // Router - маршрут
 import {Routes, Route} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 // import products from "./assets/data.json";
 
@@ -12,6 +13,7 @@ import Home from "./pages/Home.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import AddForm from "./pages/AddForm";
 
 import {Api} from "./Api";
 import Ctx from "./Ctx";
@@ -90,7 +92,7 @@ const App = () => {
             setVisibleGoods,
             PATH: PATH
         }}>
-            <div className="container">
+            <div className="wrapper">
                 <Header/>
                 <main>
                     <Routes>
@@ -98,6 +100,7 @@ const App = () => {
                         <Route path={PATH + "catalog"} element={<Catalog data={smiles}/>}/>
                         <Route path={PATH + "profile"} element={<Profile/>}/>
                         <Route path={PATH + "catalog/:id"} element={<Product/>}/>
+                        <Route path={PATH + "add"} element={<AddForm/>}/>
                     </Routes>
                 </main>
                 <Footer/>
