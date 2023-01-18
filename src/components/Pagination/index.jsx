@@ -18,6 +18,7 @@ export default ({hook}) => {
                 backgroundColor: p === current && "#222",
                 color: p === current && "yellow"
             }}
+            onClick={e => {hook.step(p)}}
         >{p}</button>)}
         <button className="btn page" disabled={current === max} onClick={hook.next}><CaretRightFill/></button>
     </div>
