@@ -19,6 +19,8 @@
     display: grid;
     gap: 20px;
     position: relative;
+    height: auto;
+    overflow: visible;
 }
 .modal h2 {
     margin: 0;
@@ -58,7 +60,6 @@ input:focus {
 }
 button.btn {
     border: none;
-    height: 30px;
     border-radius: 10px;
     background-color: rgb(243, 231, 5);
 }

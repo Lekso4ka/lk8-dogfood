@@ -1,16 +1,16 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import "./index.css";
 import Ctx from "../../Ctx";
 
 export default ({name, pictures, price, likes, _id}) => {
     const {user, setFavorites, api, setGoods} = useContext(Ctx);
-    const [like, setLike] = useState(likes.includes(user._id));
+    const [like, setLike] = useState(likes && likes.includes(user._id));
 
     const update = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        setLike(!like);
-        api.setLike(_id, like)
+        setLike(!like); // false => true
+        api.setLike(_id, like) // false
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -20,12 +20,19 @@ export default ({name, pictures, price, likes, _id}) => {
                         prev.filter(el => el._id !== _id) : 
                         [...prev, data]
                 })
-                setGoods(prev => prev.map(el => el._id === _id 
-                    && like ? 
-                    el.likes.push(user._id) : 
-                    el.likes.filter(l => l !== user._id)))
             })
     }
+
+    useEffect(() => {
+        api.getProducts()
+        .then(res => res.json())
+        .then(data => {
+            if (!data.error) {
+                setGoods(data.products);
+            }
+        })
+    }, [like]) // true
+
     return <div className="card">
         <img src={pictures} alt={name} style={{height: "100px"}}/>
         {name}
