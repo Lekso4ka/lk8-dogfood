@@ -88,7 +88,6 @@ const App = () => {
     }, [goods])
 
     useEffect(() => {
-        console.log("basket", basket);
         localStorage.setItem("basket8", JSON.stringify(basket));
     }, [basket]);
     return (

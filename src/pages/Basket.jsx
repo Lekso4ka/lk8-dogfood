@@ -1,7 +1,8 @@
-import React, {useContext, useState} from "react";
-import {Table, Image, Button, ButtonGroup} from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
+import {Table} from "react-bootstrap";
 
 import Ctx from "../Ctx";
+import Row from "../components/Row/row";
 
 /*
     +1) Создать массив корзины как Ctx
@@ -20,9 +21,18 @@ import Ctx from "../Ctx";
 export default () => {
     const [gds, setGds] = useState([]);
     const {basket, goods} = useContext(Ctx);
+    useEffect(() => {
+        let arr = [];
+        if (goods.length) {
+            basket.forEach(el => {
+                arr.push(goods.filter(g => g._id === el.id)[0])
+            })
+        }
+        setGds(arr);
+    }, [basket, goods])
     return <>
         <h1>Корзина</h1>
-        {basket.length > 0 && <Table hover>
+        {basket.length > 0 && gds.length > 0 && <Table hover>
             <thead>
                 <tr>
                     <th>Изображение</th>
@@ -32,16 +42,17 @@ export default () => {
                 </tr>
             </thead>
             <tbody>
-                {basket.map((el) => <tr key={el.id}>
-                    <td>{el.id}</td>
-                    <td></td>
-                    <td>{el.cnt}</td>
-                </tr>)}
+                {basket.map((el, i) => <Row key={el.id} {...gds[i]} {...el} />)}
             </tbody>
             <tfoot>
                 <tr>
                     <td colSpan={3} className="text-end fw-bold fs-3">ИТОГО:</td>
-                    <td className="fw-bold fs-3">0</td>
+                    <td className="fw-bold fs-3">
+                        {basket.reduce((acc, el, i) => {
+                            acc += el.cnt * gds[i].price;
+                            return acc;
+                        }, 0)}₽
+                    </td>
                 </tr>
             </tfoot>
         </Table>}
