@@ -3,7 +3,7 @@ import "./index.css";
 import Ctx from "../../Ctx";
 
 export default ({name, pictures, price, likes, _id}) => {
-    const {user, setFavorites, api, setGoods} = useContext(Ctx);
+    const {user, setFavorites, api, setGoods, setBasket} = useContext(Ctx);
     const [like, setLike] = useState(likes && likes.includes(user._id));
 
     const update = (e) => {
@@ -23,6 +23,24 @@ export default ({name, pictures, price, likes, _id}) => {
             })
     }
 
+    const buy = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBasket(prev => {
+            const test = prev.filter(el => el.id === _id)
+            if (test.length) {
+                return prev.map(el => {
+                    if (el.id === _id) {
+                        el.cnt++;
+                    }
+                    return el;
+                })
+            } else {
+                return [...prev, {id: _id, cnt: 1}]
+            }
+        })
+    }
+
     useEffect(() => {
         api.getProducts()
         .then(res => res.json())
@@ -37,7 +55,7 @@ export default ({name, pictures, price, likes, _id}) => {
         <img src={pictures} alt={name} style={{height: "100px"}}/>
         {name}
         <h6>{price} ₽</h6>
-        <button className="btn">Купить</button>
+        <button className="btn" onClick={buy}>Купить</button>
         <span className="card__heart" onClick={update}>
             {
                 like 
