@@ -25,8 +25,8 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjdhYTJiOGZkOTcyNTA2OTFhZGU5M2Y
 
 
 TODO:
-    Поставить лайки
-    Личный кабинет (фотки)
+    +Поставить лайки
+    +Личный кабинет (фотки)
     Страница товара
-    Теги (фильтрация)
+    +Теги (фильтрация)
 

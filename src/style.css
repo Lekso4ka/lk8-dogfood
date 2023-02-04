@@ -79,3 +79,7 @@ a:hover {
 .profile-row input {
     max-width: 300px;
 }
+.btn.sort {
+    background-color: #222; 
+    color: orange;
+}

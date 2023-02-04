@@ -20,6 +20,30 @@ export default () => {
         localStorage.removeItem("user8");
         navigate(PATH);
     }
+    const updUser = () => {
+        api.updUser({
+            name: name,
+            about: text
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setUser(data);
+                localStorage.setItem("user8", JSON.stringify(data));
+                setNameFlag(false);
+                setTextFlag(false);
+            });
+    }
+    const updImg = () => {
+        api.updUser({avatar: img}, true)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setUser(data);
+                localStorage.setItem("user8", JSON.stringify(data));
+                setImgFlag(false);
+            });
+    }
     return <Row>
         <Col xs={12} md={8}>
             <h1>Личный кабинет</h1>
@@ -31,7 +55,7 @@ export default () => {
                     </>
                     : <>
                         <Form.Control type="text" value={name} required onChange={e => setName(e.target.value)}/>
-                        <CheckSquare />
+                        <CheckSquare onClick={updUser}/>
                         <XSquare onClick={() => {
                             setName(user.name);
                             setNameFlag(false);
@@ -47,7 +71,7 @@ export default () => {
                     </>
                     : <>
                         <Form.Control type="text" value={text} required onChange={e => setText(e.target.value)}/>
-                        <CheckSquare/>
+                        <CheckSquare onClick={updUser}/>
                         <XSquare onClick={() => {
                             setText(user.about);
                             setTextFlag(false);
@@ -68,7 +92,7 @@ export default () => {
                     </>
                     : <>
                         <Form.Control type="text" value={img} required onChange={e => setImg(e.target.value)}/>
-                        <CheckSquare/>
+                        <CheckSquare onClick={updImg}/>
                         <XSquare onClick={() => {
                             setImg(user.avatar);
                             setImgFlag(false);
