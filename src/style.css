@@ -60,3 +60,22 @@ a:hover {
     background-position: top right;
     background-repeat: no-repeat;
 }
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profile-row svg {
+    cursor: pointer;
+    fill: silver; 
+}
+.profile-row svg:hover {
+    cursor: pointer;
+    fill: orange;
+}
+.profile-row:not(:nth-child(2)) {
+    color: grey;
+}
+.profile-row input {
+    max-width: 300px;
+}
