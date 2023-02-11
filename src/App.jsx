@@ -37,6 +37,7 @@ const App = () => {
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState(new Api(token));
     const [goods, setGoods] = useState([]);
+    const [authors, setAuthors] = useState([]);
     const [visibleGoods, setVisibleGoods] = useState(goods);
     const [favorites, setFavorites] = useState([]);
     const [basket, setBasket] = useState(localStorage.getItem("basket8") ? JSON.parse(localStorage.getItem("basket8")) : []);
@@ -49,6 +50,13 @@ const App = () => {
                 .then(data => {
                     setGoods(data.products);
                 })
+            api.getUsers()
+                .then(res => res.json())
+                .then(data => {
+                    console.log("af-af", data);
+                    setAuthors(data);
+                })
+
         }
     }, []) // функция отработает один раз при создании компонента
 
@@ -107,7 +115,8 @@ const App = () => {
             setFavorites: setFavorites,
             PATH: PATH,
             basket,
-            setBasket
+            setBasket,
+            authors
         }}>
             <div className="wrapper">
                 <Header/>

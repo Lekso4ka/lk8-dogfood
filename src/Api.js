@@ -30,6 +30,13 @@ class Api {
             }
         })
     }
+    getUsers() {
+        return fetch(`${this.path}/v2/${this.group}/users`, {
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        })
+    }
     getProduct(id) {
         return fetch(`${this.path}/products/${id}`, {
             headers: {
